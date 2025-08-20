@@ -1,0 +1,28 @@
+services:
+  app:
+    image: laradock/php-fpm:latest-8.4
+    working_dir: /application
+    volumes:
+      - .:/application
+    ports:
+      - "4001:8000"
+    command: php artisan serve --host=0.0.0.0 --port=8000
+    env_file: .env
+    depends_on:
+      - postgres
+      - redis
+
+  postgres:
+    image: postgres:13.1
+    working_dir: /application
+    volumes:
+      - .:/application
+    environment:
+      - POSTGRES_PASSWORD=123456
+    ports:
+      - "4002:5432"
+ 
+  redis:
+    image: redis:alpine
+    volumes:
+      - .:/application
