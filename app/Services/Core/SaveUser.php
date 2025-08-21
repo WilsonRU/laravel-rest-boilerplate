@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Hash;
 
 class SaveUser
 {
-    private function __construct(
+    public function __construct(
         private readonly UserRepositoryInterface $userRepository
     ) {}
 

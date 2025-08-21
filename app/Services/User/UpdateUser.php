@@ -10,7 +10,7 @@ use App\Repositories\Contracts\UserRepositoryInterface;
 
 class UpdateUser
 {
-    private function __construct(
+    public function __construct(
         private readonly UserRepositoryInterface $userRepository
     ) {}
 

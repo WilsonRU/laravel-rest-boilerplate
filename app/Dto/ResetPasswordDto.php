@@ -16,8 +16,8 @@ readonly class ResetPasswordDto
     {
         Assert::that($params['password'])
             ->notNull('Field password a required.')
-            ->minLength(6, 'Must contain a minimum of 6 characters.')
-            ->string('Invalid type. Expected string.');
+            ->string('Invalid type. Expected string.')
+            ->minLength(6, 'Must contain a minimum of 6 characters.');
     }
 
     public static function fromArray(array $params): self

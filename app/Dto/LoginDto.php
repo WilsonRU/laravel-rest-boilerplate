@@ -17,13 +17,13 @@ readonly class LoginDto
     {
         Assert::that($params['email'])
             ->notNull('Field email a required.')
-            ->email('Not a valid email format.')
-            ->string('Invalid type. Expected string.');
+            ->string('Invalid type. Expected string.')
+            ->email('Not a valid email format.');
 
         Assert::that($params['password'])
             ->notNull('Field password a required.')
-            ->minLength(6, 'Must contain a minimum of 6 characters.')
-            ->string('Invalid type. Expected string.');
+            ->string('Invalid type. Expected string.')
+            ->minLength(6, 'Must contain a minimum of 6 characters.');
     }
 
     public function toArray(): array

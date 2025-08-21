@@ -16,8 +16,8 @@ readonly class ForgotPasswordDto
     {
         Assert::that($params['email'])
             ->notNull('Field email a required.')
-            ->email('Not a valid email format.')
-            ->string('Invalid type. Expected string.');
+            ->string('Invalid type. Expected string.')
+            ->email('Not a valid email format.');
     }
 
     public static function fromArray(array $params): self

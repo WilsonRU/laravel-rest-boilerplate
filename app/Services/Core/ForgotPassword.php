@@ -10,7 +10,7 @@ use Illuminate\Validation\ValidationException;
 
 class ForgotPassword
 {
-    private function __construct(
+    public function __construct(
         private readonly UserRepositoryInterface $userRepository
     ) {}
 

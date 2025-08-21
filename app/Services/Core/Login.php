@@ -11,7 +11,7 @@ use Illuminate\Validation\ValidationException;
 
 class Login
 {
-    private function __construct(
+    public function __construct(
         private readonly UserRepositoryInterface $userRepository
     ) {}
 
