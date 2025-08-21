@@ -7,7 +7,7 @@ namespace App\Repositories\Eloquent;
 use App\Models\User;
 use App\Repositories\Contracts\UserRepositoryInterface;
 
-class UserRepository implements UserRepositoryInterface
+final class UserRepository implements UserRepositoryInterface
 {
     public function __construct(
         protected User $model
@@ -15,12 +15,18 @@ class UserRepository implements UserRepositoryInterface
 
     public function byId(int $id): User
     {
-        return $this->model::where('id', $id)->whereNull('deleted_at')->first();
+        /** @var User $user */
+        $user = $this->model::where('id', $id)->whereNull('deleted_at')->firstOrFail();
+
+        return $user;
     }
 
-    public function byEmail(string $email): User
+    public function byEmail(string $email): ?User
     {
-        return $this->model::where('email', $email)->whereNull('deleted_at')->first();
+        /** @var User|null $user */
+        $user = $this->model::where('email', $email)->whereNull('deleted_at')->first();
+
+        return $user;
     }
 
     public function create(array $data): User
@@ -28,7 +34,7 @@ class UserRepository implements UserRepositoryInterface
         return $this->model->create($data);
     }
 
-    public function update($id, array $data): User
+    public function update(int $id, array $data): User
     {
         $model = $this->byId($id);
         $model->update($data);
@@ -36,7 +42,7 @@ class UserRepository implements UserRepositoryInterface
         return $model;
     }
 
-    public function delete($id): void
+    public function delete(int $id): void
     {
         $model = $this->byId($id);
         $model->delete();

@@ -10,7 +10,7 @@ interface UserRepositoryInterface
 {
     public function byId(int $id): User;
 
-    public function byEmail(string $email): User;
+    public function byEmail(string $email): ?User;
 
     public function create(array $data): User;
 

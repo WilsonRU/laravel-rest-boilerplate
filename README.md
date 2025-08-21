@@ -1,4 +1,4 @@
-# Laravel RestAPI Boilerplate
+# Laravel Rest Boilerplate
 
 This repository provides a **clean and scalable boilerplate** for
 Laravel 12 applications.\
@@ -16,10 +16,11 @@ structured data handling.
     the code more testable.\
 -   **DTOs (Data Transfer Objects)** -- ensures consistent and validated
     data transfer between layers.\
--   **Clean Architecture Principles** -- improves maintainability and
-    scalability.\
--   **Laravel Sanctum with JWT** -- authentication ready for **REST API
-    only**.
+-   **Clean Architecture Principles** -- improves maintainability and scalability.\
+-   **Laravel Sanctum with JWT** -- authentication ready for **REST API only**.\
+-   **Laravel Pint** -- code formatting tool to enforce coding style.\
+-   **PHPStan (Level 8)** -- static analysis tool to detect errors and
+    enforce type safety.
 
 ------------------------------------------------------------------------
 
@@ -96,7 +97,7 @@ It is designed for **REST API only**, without frontend scaffolding.
     "user": {
         "id": 1,
         "name": "Teste",
-        ....
+        ...
     }
 }
 ```
@@ -114,3 +115,18 @@ Run tests with:
 php artisan test
 ```
 
+------------------------------------------------------------------------
+
+## 🖌 Code Quality
+
+- **Laravel Pint**: Apply coding style formatting
+
+``` bash
+    composer pint
+```
+
+- **PHPStan Level 8**: Run static analysis to catch errors early
+
+``` bash
+    composer stan
+```

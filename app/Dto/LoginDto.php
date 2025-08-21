@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Dto;
 
+use Assert\Assert;
+
 readonly class LoginDto
 {
     private function __construct(
@@ -11,19 +13,34 @@ readonly class LoginDto
         public readonly string $password
     ) {}
 
+    private static function validate(array $params): void
+    {
+        Assert::that($params['email'])
+            ->notNull('Field email a required.')
+            ->email('Not a valid email format.')
+            ->string('Invalid type. Expected string.');
+
+        Assert::that($params['password'])
+            ->notNull('Field password a required.')
+            ->minLength(6, 'Must contain a minimum of 6 characters.')
+            ->string('Invalid type. Expected string.');
+    }
+
     public function toArray(): array
     {
         return [
             'email' => $this->email,
-            'password' => $this->password
+            'password' => $this->password,
         ];
     }
 
-    public static function fromArray(array $validated): self
+    public static function fromArray(array $params): self
     {
+        self::validate($params);
+
         return new self(
-            email: (string) $validated['email'],
-            password: (string) $validated['password']
+            email: (string) $params['email'],
+            password: (string) $params['password']
         );
     }
 }

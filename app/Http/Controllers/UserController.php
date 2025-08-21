@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Dto\UpdateUserDto;
+use App\Models\User;
+use App\Services\User\UpdateUser;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -11,18 +14,18 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    public function __construct(
+        private readonly UpdateUser $updateUserService
+    ) {}
+
     public function updateUser(Request $request): JsonResponse
     {
-        $validated = $request->validate([
-            'name' => 'required|min:4|max:200',
-        ]);
+        $dto = UpdateUserDto::fromArray($request->all());
 
-        /** @var App\Models\User $user */
+        /** @var User $user */
         $user = Auth::user();
 
-        $user->update([
-            'name' => $validated['name'],
-        ]);
+        $this->updateUserService->update($dto, $user);
 
         return response()->json([
             'Profile updated successfully',

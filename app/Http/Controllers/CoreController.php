@@ -8,6 +8,7 @@ use App\Dto\ForgotPasswordDto;
 use App\Dto\LoginDto;
 use App\Dto\ResetPasswordDto;
 use App\Dto\SaveUserDto;
+use App\Models\User;
 use App\Services\Core\ForgotPassword;
 use App\Services\Core\Login;
 use App\Services\Core\ResetPassword;
@@ -28,12 +29,7 @@ class CoreController extends Controller
 
     public function login(Request $request): JsonResponse
     {
-        $validated = $request->validate([
-            'email' => 'required|email:rfc,dns',
-            'password' => 'required|min:6',
-        ]);
-
-        $dto = LoginDto::fromArray($validated);
+        $dto = LoginDto::fromArray($request->all());
 
         if (Auth::attempt($dto->toArray())) {
             $dataResponse = $this->loginService->login($dto);
@@ -48,13 +44,7 @@ class CoreController extends Controller
 
     public function signup(Request $request): JsonResponse
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:100',
-            'email' => 'required|email:rfc,dns|unique:users,email',
-            'password' => 'required|min:6',
-        ]);
-
-        $dto = SaveUserDto::fromArray($validated);
+        $dto = SaveUserDto::fromArray($request->all());
         $this->saveUserService->save($dto);
 
         return response()->json([
@@ -64,11 +54,7 @@ class CoreController extends Controller
 
     public function forgotPassword(Request $request): JsonResponse
     {
-        $validated = $request->validate([
-            'email' => 'required|email:rfc,dns',
-        ]);
-
-        $dto = ForgotPasswordDto::fromArray($validated);
+        $dto = ForgotPasswordDto::fromArray($request->all());
 
         $this->forgotPasswordService->forgot($dto);
 
@@ -79,12 +65,11 @@ class CoreController extends Controller
 
     public function resetPassword(Request $request): JsonResponse
     {
-        $validated = $request->validate([
-            'password' => 'required|min:6',
-        ]);
+        $dto = ResetPasswordDto::fromArray($request->all());
 
-        $dto = ResetPasswordDto::fromArray($validated);
-        $this->resetPasswordService->reset($dto, Auth::user());
+        /** @var User $user */
+        $user = Auth::user();
+        $this->resetPasswordService->reset($dto, $user);
 
         return response()->json([
             'message' => 'Password changed successfully',

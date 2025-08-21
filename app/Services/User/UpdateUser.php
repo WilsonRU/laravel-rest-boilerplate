@@ -2,23 +2,22 @@
 
 declare(strict_types=1);
 
-namespace App\Services\Core;
+namespace App\Services\User;
 
-use App\Dto\ResetPasswordDto;
+use App\Dto\UpdateUserDto;
 use App\Models\User;
 use App\Repositories\Contracts\UserRepositoryInterface;
-use Illuminate\Support\Facades\Hash;
 
-class ResetPassword
+class UpdateUser
 {
     private function __construct(
         private readonly UserRepositoryInterface $userRepository
     ) {}
 
-    public function reset(ResetPasswordDto $resetPasswordDto, User $user): void
+    public function update(UpdateUserDto $updateUserDto, User $user): void
     {
         $this->userRepository->update($user->getAttribute('id'), [
-            'password' => Hash::make($resetPasswordDto->password),
+            'name' => $updateUserDto->name,
         ]);
     }
 }

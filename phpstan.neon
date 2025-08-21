@@ -1,0 +1,13 @@
+parameters:
+  parallel:
+    processTimeout: 300.0
+  level: 8
+  paths:
+    - app
+  excludePaths:
+    - app/Models/**
+  ignoreErrors:
+    - identifier: missingType.generics
+    - identifier: missingType.iterableValue
+  treatPhpDocTypesAsCertain: false
+  reportUnmatchedIgnoredErrors: false
