@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Service\Core;
+namespace Tests\Unit\Service\Core;
 
 use App\Dto\LoginDto;
 use App\Models\User;

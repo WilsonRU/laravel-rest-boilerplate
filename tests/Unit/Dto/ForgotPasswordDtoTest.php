@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Dto;
+namespace Tests\Unit\Dto;
 
 use App\Dto\ForgotPasswordDto;
 use InvalidArgumentException;

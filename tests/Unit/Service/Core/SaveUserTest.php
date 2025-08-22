@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Service\Core;
+namespace Tests\Unit\Service\Core;
 
 use App\Dto\SaveUserDto;
 use App\Repositories\Contracts\UserRepositoryInterface;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Service\User;
+namespace Tests\Unit\Service\User;
 
 use App\Dto\UpdateUserDto;
 use App\Models\User;
