@@ -10,15 +10,17 @@ structured data handling.
 
 ## 🚀 Features
 
--   **Laravel 12** -- latest version of the framework.\
--   **Service Layer** -- isolates business logic from controllers.\
+-   **Laravel 12** -- latest version of the framework.
+-   **Service Layer** -- isolates business logic from controllers.
 -   **Repository Pattern** -- abstracts database persistence and makes
-    the code more testable.\
+    the code more testable.
+-   **Rate Limiter** -- Rate Limiter is implemented to throttle user/IP 
+    requests and prevent abuse or brute-force attacks. 
 -   **DTOs (Data Transfer Objects)** -- ensures consistent and validated
-    data transfer between layers.\
--   **Clean Architecture Principles** -- improves maintainability and scalability.\
--   **Laravel Sanctum with JWT** -- authentication ready for **REST API only**.\
--   **Laravel Pint** -- code formatting tool to enforce coding style.\
+    data transfer between layers.
+-   **Clean Architecture Principles** -- improves maintainability and scalability.
+-   **Laravel Sanctum with JWT** -- authentication ready for **REST API only**.
+-   **Laravel Pint** -- code formatting tool to enforce coding style.
 -   **PHPStan (Level 8)** -- static analysis tool to detect errors and
     enforce type safety.
 
