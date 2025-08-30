@@ -18,6 +18,40 @@ class UserController extends Controller
         private readonly UpdateUser $updateUserService
     ) {}
 
+    /**
+     * @OA\Put(
+     *     path="/api/user/",
+     *     summary="Update user name",
+     *     description="Update only the username by the ID taken by the token",
+     *     tags={"Users"},
+     *     security={{"sanctum":{}}},
+     *
+     *     @OA\RequestBody(
+     *         required=true,
+     *
+     *         @OA\JsonContent(
+     *             required={"name"},
+     *
+     *             @OA\Property(property="name", type="string", example="Test Name")
+     *         )
+     *     ),
+     *
+     *     @OA\Response(
+     *         response=200,
+     *         description="Profile updated successfully",
+     *
+     *         @OA\JsonContent(
+     *
+     *             @OA\Property(property="message", type="string", example="Profile updated successfully")
+     *         )
+     *     ),
+     *
+     *     @OA\Response(
+     *         response=404,
+     *         description="User not found."
+     *     )
+     * )
+     */
     public function updateUser(Request $request): JsonResponse
     {
         $dto = UpdateUserDto::fromArray($request->all());
@@ -28,7 +62,7 @@ class UserController extends Controller
         $this->updateUserService->update($dto, $user);
 
         return response()->json([
-            'Profile updated successfully',
+            'message' => 'Profile updated successfully',
         ], Response::HTTP_ACCEPTED);
     }
 }

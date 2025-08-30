@@ -23,6 +23,7 @@ structured data handling.
 -   **Laravel Pint** -- code formatting tool to enforce coding style.
 -   **PHPStan (Level 8)** -- static analysis tool to detect errors and
     enforce type safety.
+-   **Swagger** -- Generate API documentation
 
 ------------------------------------------------------------------------
 
@@ -132,3 +133,16 @@ php artisan test
 ``` bash
     composer stan
 ```
+------------------------------------------------------------------------
+
+## 📃 API Documentation
+
+- **Swagger**: Generate API Documenation
+
+``` bash
+    composer docs
+```
+
+
+    GET /api/documentation 200
+
