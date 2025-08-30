@@ -115,7 +115,7 @@ This boilerplate is designed to be **easily testable**.\
 Run tests with:
 
 ``` bash
-php artisan test
+    composer test
 ```
 
 ------------------------------------------------------------------------

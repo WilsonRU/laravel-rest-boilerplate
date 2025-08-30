@@ -6,6 +6,7 @@ namespace App\Repositories\Eloquent;
 
 use App\Models\User;
 use App\Repositories\Contracts\UserRepositoryInterface;
+use Exception;
 
 final class UserRepository implements UserRepositoryInterface
 {
@@ -15,18 +16,24 @@ final class UserRepository implements UserRepositoryInterface
 
     public function byId(int $id): User
     {
-        /** @var User $user */
-        $user = $this->model::where('id', $id)->whereNull('deleted_at')->firstOrFail();
+        $result = $this->model::where('id', $id)->whereNull('deleted_at')->firstOrFail();
 
-        return $user;
+        if ($result instanceof User) {
+            return $result;
+        }
+
+        throw new Exception('The requested user could not be found');
     }
 
-    public function byEmail(string $email): ?User
+    public function byEmail(string $email): User
     {
-        /** @var User|null $user */
-        $user = $this->model::where('email', $email)->whereNull('deleted_at')->first();
+        $result = $this->model::where('email', $email)->whereNull('deleted_at')->firstOrFail();
 
-        return $user;
+        if ($result instanceof User) {
+            return $result;
+        }
+
+        throw new Exception('The requested user could not be found');
     }
 
     public function create(array $data): User

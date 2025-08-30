@@ -19,7 +19,7 @@ class Login
     {
         $user = $this->userRepository->byEmail($loginDto->email);
 
-        if (! $user || ! Hash::check($loginDto->password, $user->getAttribute('password'))) {
+        if (! Hash::check($loginDto->password, $user->getAttribute('password'))) {
             throw ValidationException::withMessages([
                 'email' => ['The provided credentials are incorrect'],
             ]);

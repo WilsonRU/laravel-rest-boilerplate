@@ -8,6 +8,7 @@ use App\Dto\LoginDto;
 use App\Models\User;
 use App\Repositories\Contracts\UserRepositoryInterface;
 use App\Services\Core\Login;
+use Exception;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Tests\TestCase;
@@ -49,7 +50,7 @@ class Logintest extends TestCase
 
     public function test_it_throws_exception_if_user_not_found(): void
     {
-        $this->expectException(ValidationException::class);
+        $this->expectException(Exception::class);
 
         $userRepository = $this->createMock(UserRepositoryInterface::class);
 
@@ -59,8 +60,7 @@ class Logintest extends TestCase
         ]);
 
         $userRepository->expects($this->once())
-            ->method('byEmail')
-            ->willReturn(null);
+            ->method('byEmail');
 
         $login = new Login($userRepository);
 
