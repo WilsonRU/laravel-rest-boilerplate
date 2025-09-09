@@ -26,3 +26,5 @@ services:
     image: redis:alpine
     volumes:
       - .:/application
+    ports:
+      - "4003:6379"

@@ -9,7 +9,9 @@ use Assert\Assert;
 readonly class ForgotPasswordDto
 {
     private function __construct(
-        public readonly string $email
+        public readonly string $email,
+        public readonly ?string $code,
+        public readonly ?string $password
     ) {}
 
     private static function validate(array $params): void
@@ -25,7 +27,9 @@ readonly class ForgotPasswordDto
         self::validate($params);
 
         return new self(
-            email: (string) $params['email']
+            email: (string) $params['email'],
+            code: $params['code'] ?? null,
+            password: $params['password'] ?? null
         );
     }
 }
