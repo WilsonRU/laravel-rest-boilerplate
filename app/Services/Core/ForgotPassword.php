@@ -40,6 +40,8 @@ class ForgotPassword
             $this->userRepository->update($user->getAttribute('id'), [
                 'password' => Hash::make((string) $forgotPasswordDto->password),
             ]);
+
+            return;
         }
 
         throw new Exception('Invalid Verification Code');
